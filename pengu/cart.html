@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Mirrored from wpocean.com/html/tf/pengu/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Jun 2025 07:15:34 GMT -->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="wpOceans" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="assets/images/favicon.png"
+    />
+    <title>Pengu - eCommerce HTML5 Template</title>
+    <link href="assets/css/themify-icons.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/flaticon.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/animate.css" rel="stylesheet" />
+    <link href="assets/css/owl.carousel.css" rel="stylesheet" />
+    <link href="assets/css/owl.theme.css" rel="stylesheet" />
+    <link href="assets/css/slick.css" rel="stylesheet" />
+    <link href="assets/css/slick-theme.css" rel="stylesheet" />
+    <link href="assets/css/swiper.min.css" rel="stylesheet" />
+    <link href="assets/css/owl.transitions.css" rel="stylesheet" />
+    <link href="assets/css/jquery.fancybox.css" rel="stylesheet" />
+    <link href="assets/css/odometer-theme-default.css" rel="stylesheet" />
+    <link href="assets/sass/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- start page-wrapper -->
+    <div class="page-wrapper">
+      <!-- start preloader -->
+      <div class="preloader">
+        <div class="vertical-centered-box">
+          <div class="content">
+            <div class="loader-circle"></div>
+            <div class="loader-line-mask">
+              <div class="loader-line"></div>
+            </div>
+            <img src="assets/images/preloader.png" alt="" />
+          </div>
+        </div>
+      </div>
+      <!-- end preloader -->
+
+      <!-- Start header -->
+      <header id="header" class="wpo-header-style-3">
+        <!-- end topbar -->
+        <div class="wpo-site-header">
+          <nav class="navigation navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+              <div class="row align-items-center">
+                <div class="col-lg-3 col-md-3 col-3 d-lg-none dl-block">
+                  <div class="mobail-menu">
+                    <button type="button" class="navbar-toggler open-btn">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar first-angle"></span>
+                      <span class="icon-bar middle-angle"></span>
+                      <span class="icon-bar last-angle"></span>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-6">
+                  <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html"
+                      ><img src="assets/images/logo.svg" alt="logo"
+                    /></a>
+                  </div>
+                </div>
+                <div class="col-lg-8 col-md-1 col-1">
+                  <div
+                    id="navbar"
+                    class="collapse navbar-collapse navigation-holder"
+                  >
+                    <button class="menu-close"><i class="ti-close"></i></button>
+                    <ul class="nav navbar-nav mb-2 mb-lg-0">
+                      <li>
+                        <a href="index.html">Home</a>
+                      </li>
+
+                      <li><a href="shop.html">Shop</a></li>
+                      <li class="menu-item-has-children">
+                        <a class="active" href="cart.html">Cart</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- end of nav-collapse -->
+                </div>
+                <div class="col-lg-2 col-md-2 col-2">
+                  <div class="header-right">
+                    <div class="mini-cart">
+                      <button class="cart-toggle-btn">
+                        <i class="fi flaticon-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                      </button>
+                      <div class="mini-cart-content">
+                        <!-- Dinamik doldurulacaq məhsullar -->
+                        <div class="mini-cart-items" id="mini-cart-items"></div>
+
+                        <!-- Aşağı hissə: Subtotal və düymələr -->
+                        <div class="mini-cart-action clearfix">
+                          <span class="mini-checkout-price">
+                            Subtotal: <span>$0.00</span>
+                          </span>
+                          <div class="mini-btn">
+                            <a href="cart.html" class="view-cart-btn"
+                              >View Cart</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="header-search-form-wrapper">
+                      <div class="cart-search-contact">
+                        <button class="search-toggle-btn">
+                          <i class="fi flaticon-loupe"></i>
+                        </button>
+                        <div class="header-search-form">
+                          <form>
+                            <div>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Search here..."
+                              />
+                              <button type="submit">
+                                <i class="fi flaticon-loupe"></i>
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end of container -->
+          </nav>
+        </div>
+      </header>
+      <!-- end of header -->
+
+      <!-- start wpo-page-title -->
+      <section class="wpo-page-title">
+        <div class="container">
+          <div class="row">
+            <div class="col col-xs-12">
+              <div class="wpo-breadcumb-wrap">
+                <h2>Cart</h2>
+                <ol class="wpo-breadcumb-wrap">
+                  <li><a href="index.html">Home</a></li>
+                  <li>Cart</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <!-- end row -->
+        </div>
+        <!-- end container -->
+      </section>
+      <!-- end page-title -->
+
+      <!-- cart-area start -->
+      <div class="cart-area section-padding">
+        <div class="container">
+          <div class="form">
+            <div class="cart-wrapper">
+              <div class="row">
+                <div class="col-12">
+                  <form action="https://wpocean.com/html/tf/pengu/cart">
+                    <table class="table-responsive cart-wrap">
+                      <thead>
+                        <tr>
+                          <th class="images images-b">Image</th>
+                          <th class="product-2">Product Name</th>
+                          <th class="pr">Quantity</th>
+                          <th class="ptice">Price</th>
+                          <th class="stock">Total Price</th>
+                          <th class="remove remove-b">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody id="cart-body"></tbody>
+                    </table>
+                  </form>
+                  <div class="submit-btn-area">
+                    <ul>
+                      <li>
+                        <a class="theme-btn" href="shop.html"
+                          >Continue Shopping
+                          <i class="fa fa-angle-double-right"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="cart-product-list">
+                    <ul>
+                      <li>
+                        Total product <span class="total-count">(0)</span>
+                      </li>
+                      <li>Sub Price <span class="sub-price">$0.00</span></li>
+                      <li>Vat <span class="vat-price">$0.00</span></li>
+                      <li>Eco Tax <span class="eco-price">$0.00</span></li>
+                      <li>
+                        Delivery Charge
+                        <span class="delivery-price">$0.00</span>
+                      </li>
+                      <li class="cart-b">
+                        Total Price <span class="total-price">$0.00</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="submit-btn-area">
+                    <ul>
+                      <li>
+                        <a class="theme-btn" href="#"
+                          >Proceed to Checkout
+                          <i class="fa fa-angle-double-right"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- cart-area end -->
+
+      <!-- start of wpo-site-footer-section -->
+      <footer class="wpo-site-footer">
+        <div class="wpo-upper-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+                <div class="widget about-widget">
+                  <div class="logo widget-title">
+                    <img src="assets/images/logo.svg" alt="blog" />
+                  </div>
+                  <p>
+                    Mattis inelit neque quis donecyir eleng amet. Amet sed et
+                    cursus eu euiod. Egestaerets in morbiet tristique ornare
+                    vulputate vitae enim.
+                  </p>
+                  <div class="social-widget">
+                    <ul>
+                      <li>
+                        <a href="#"
+                          ><i class="fa fa-facebook" aria-hidden="true"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#"
+                          ><i class="fa fa-twitter" aria-hidden="true"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#"
+                          ><i class="fa fa-skype" aria-hidden="true"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#"
+                          ><i
+                            class="fa fa-linkedin-square"
+                            aria-hidden="true"
+                          ></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col col-xl-2 col-lg-3 col-md-6 col-sm-12 col-12">
+                <div class="widget link-widget">
+                  <div class="widget-title">
+                    <h3>Categories</h3>
+                  </div>
+                  <ul>
+                    <li><a href="shop.html">Men</a></li>
+                    <li><a href="shop.html">Women</a></li>
+                    <li><a href="shop.html">Electronics</a></li>
+                    <li><a href="shop.html">Jwellery</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col col-lg-4 col-md-6 col-sm-12 col-12">
+                <div class="widget blog-widget">
+                  <div class="widget-title">
+                    <h3>Blog Post</h3>
+                  </div>
+                  <ul>
+                    <li>
+                      <div class="image">
+                        <img src="assets/images/news/img-01.jpg" alt="" />
+                      </div>
+                      <div class="text">
+                        <p>
+                          <a href="blog-single.html"
+                            >It is a long established fact that a reader will be
+                            distracted.</a
+                          >
+                        </p>
+                        <span>12 December, 2023</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="image">
+                        <img src="assets/images/news/img-02.jpg" alt="" />
+                      </div>
+                      <div class="text">
+                        <p>
+                          <a href="blog-single.html"
+                            >It is a long established fact that a reader will be
+                            distracted.</a
+                          >
+                        </p>
+                        <span>12 December, 2023</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
+                <div class="widget newsletter-widget">
+                  <div class="widget-title">
+                    <h3>Newsletter</h3>
+                  </div>
+                  <p>
+                    Subscribe to our newsletter and get 10% off your first
+                    purchase.
+                  </p>
+                  <form>
+                    <div class="input-1">
+                      <input
+                        type="email"
+                        class="form-control"
+                        placeholder="Your Email Address.. "
+                        required=""
+                      />
+                    </div>
+                    <div class="submit clearfix">
+                      <button type="submit">Subscribe</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end container -->
+        </div>
+        <div class="wpo-lower-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col col-xs-12">
+                <p class="copyright">
+                  Copyright &copy; 2023 Canun by
+                  <a href="index.html">wpOceans</a>. All Rights Reserved.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- end of wpo-site-footer-section -->
+    </div>
+    <!-- end of page-wrapper -->
+
+    <!-- All JavaScript files
+    ================================================== -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Plugins for this template -->
+    <script src="assets/js/modernizr.custom.js"></script>
+    <script src="assets/js/jquery.dlmenu.js"></script>
+    <script src="assets/js/jquery-plugin-collection.js"></script>
+    <!-- Custom script for this template -->
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/cart-count.js"></script>
+    <script src="assets/js/mini-cart.js"></script>
+  </body>
+
+  <!-- Mirrored from wpocean.com/html/tf/pengu/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Jun 2025 07:15:36 GMT -->
+</html>
