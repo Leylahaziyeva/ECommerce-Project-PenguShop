@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (pathname.includes("index.html")) {
     loadHomeProducts();
-    loadPopularProducts();
   } else if (pathname.includes("shop.html")) {
     loadShopProducts();
     setupLoadMore();
