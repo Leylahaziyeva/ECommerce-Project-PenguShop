@@ -44,11 +44,18 @@ function loadHomeProducts() {
                     <i class="fi flaticon-shopping-cart"></i>
                   </a>
                 </li>
-                <li>
-                  <button data-bs-toggle="tooltip" title="Quick View">
-                    <i class="fi ti-eye"></i>
-                  </button>
-                </li>
+               <li>
+  <button
+    class="quickview-btn"
+    title="Quick View"
+    data-bs-toggle="modal"
+    data-bs-target="#popup-quickview"
+    data-product='${JSON.stringify(p).replace(/'/g, "&apos;")}'
+  >
+    <i class="fi ti-eye"></i>
+  </button>
+</li>
+
               </ul>
               <div class="shop-btn">
                 <a class="product-btn" href="product-single.html?id=${
@@ -58,6 +65,7 @@ function loadHomeProducts() {
             </div>
             <div class="text">
               <h2><a href="product-single.html?id=${p.id}">${p.title}</a></h2>
+              
               <div class="price">
                 <del class="old-price">$${(p.price * 1.2).toFixed(2)}</del>
                 <span class="present-price">$${p.price}</span>
@@ -69,6 +77,48 @@ function loadHomeProducts() {
         )
         .join("");
     });
+}
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".quickview-btn");
+  if (btn) {
+    const productData = btn
+      .getAttribute("data-product")
+      ?.replace(/&apos;/g, "'");
+    const product = JSON.parse(productData);
+    showQuickView(product);
+  }
+});
+
+function generateStars(rating) {
+  const fullStars = Math.floor(rating);
+  const halfStar = rating - fullStars >= 0.5;
+  const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+  return (
+    "<li>"
+      .repeat(fullStars)
+      .replace(/li>/g, 'i class="fa fa-star" aria-hidden="true"></i></li>') +
+    (halfStar
+      ? '<li><i class="fa fa-star-half-o" aria-hidden="true"></i></li>'
+      : "") +
+    "<li>"
+      .repeat(emptyStars)
+      .replace(/li>/g, 'i class="fa fa-star-o" aria-hidden="true"></i></li>')
+  );
+}
+
+function showQuickView(product) {
+  const modal = document.querySelector("#popup-quickview");
+  modal.querySelector(".quickview-image").src = product.image;
+  modal.querySelector(".product-single-content h5").textContent = product.title;
+  modal.querySelector(
+    ".product-single-content h6"
+  ).textContent = `$${product.price}`;
+  modal.querySelector(".product-single-content p").textContent =
+    product.description;
+  modal.querySelector(".product-single-content .rating").innerHTML =
+    generateStars(product.rating?.rate || 0);
 }
 
 function updateCartCount() {
