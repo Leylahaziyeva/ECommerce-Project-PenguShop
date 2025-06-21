@@ -31,10 +31,6 @@ function loadHomeProducts() {
           <div class="product-single-item">
             <div class="image">
               <img src="${p.image}" alt="${p.title}" />
-              <div class="card-icon">
-                <a class="icon" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                <a class="icon-active" href="#"><i class="fa fa-heart" aria-hidden="true"></i></a>
-              </div>
               <ul class="cart-wrap">
                 <li>
                   <a href="#" onclick="addToCart(${

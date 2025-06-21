@@ -25,10 +25,6 @@ function renderProducts(products) {
         <div class="product-single-item" data-category="${p.category.toLowerCase()}">
           <div class="image">
             <img src="${p.image}" alt="${p.title}" />
-            <div class="card-icon">
-              <a class="icon" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-              <a class="icon-active" href="#"><i class="fa fa-heart" aria-hidden="true"></i></a>
-            </div>
             <ul class="cart-wrap">
               <li>
                 <a href="#" onclick="addToCart(${
@@ -124,15 +120,8 @@ function setupShopFilterSearch() {
 function setupFilters() {
   const priceInputs = document.querySelectorAll("input[name='topcoat']");
   const categoryInputs = document.querySelectorAll("input[name='category']");
-  const sizeInputs = document.querySelectorAll("input[name='topcoat2']");
-  const colorInputs = document.querySelectorAll("input[name='col']");
 
-  const allInputs = [
-    ...priceInputs,
-    ...categoryInputs,
-    ...sizeInputs,
-    ...colorInputs,
-  ];
+  const allInputs = [...priceInputs, ...categoryInputs];
 
   allInputs.forEach((input) => {
     input.addEventListener("change", applyFilters);
