@@ -38,52 +38,70 @@ function updateMiniCart() {
     return;
   }
 
-  let html = "";
-  let subtotal = 0;
-  let count = 0;
+  const fetches = cart
+    .slice(0, 4)
+    .map((item) =>
+      fetch(`https://fakestoreapi.com/products/${item.id}`).then((res) =>
+        res.json()
+      )
+    );
 
-  cart.slice(0, 4).forEach((item, index, array) => {
-    fetch(`https://fakestoreapi.com/products/${item.id}`)
-      .then((res) => res.json())
-      .then((product) => {
+  Promise.all(fetches)
+    .then((products) => {
+      let html = "";
+      let subtotal = 0;
+
+      for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        const item = cart[i];
         const price = Number(product.price) || 0;
-        const qty = Number(item.qty || item.quantity) || 0;
-        const total = price * qty;
-        subtotal += total;
+        const qty = Number(item.qty) || 0;
+        const itemTotal = price * qty;
+
+        subtotal += itemTotal;
 
         html += `
-  <div class="mini-cart-item clearfix">
-    <div class="mini-cart-item-image">
-      <a href="product-single.html?id=${product.id}">
-        <img src="${product.image}" alt="${
+          <div class="mini-cart-item clearfix" style="display: flex; align-items: center; margin-bottom: 10px;">
+            <div style="flex-shrink: 0; margin-right: 10px;">
+              <a href="product-single.html?id=${product.id}">
+                <img src="${product.image}" alt="${
           product.title
         }" style="width: 60px; height: 60px; object-fit: contain;">
-      </a>
-    </div>
-    <div class="mini-cart-item-des">
-      <a href="product-single.html?id=${product.id}">${product.title}</a>
-      <span class="mini-cart-item-price">$${price.toFixed(2)} x ${qty}</span>
-    </div>
-  </div>
-`;
-      })
-      .catch((err) => console.error("Fetch error:", err))
-      .finally(() => {
-        count++;
-        if (count === array.length) {
-          container.innerHTML = html;
-          if (cart.length > 4) {
-            container.innerHTML += `<p>+${
-              cart.length - 4
-            } more item(s) in cart</p>`;
-          }
-          const subtotalEl = document.querySelector(
-            ".mini-checkout-price span"
-          );
-          if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-        }
-      });
-  });
+              </a>
+            </div>
+            <div style="flex-grow: 1;">
+              <a href="product-single.html?id=${product.id}">${
+          product.title
+        }</a><br>
+              <span>$${price.toFixed(2)} x ${qty} = $${itemTotal.toFixed(
+          2
+        )}</span>
+            </div>
+            <div>
+              <a href="#" onclick="removeFromCart(${
+                item.id
+              }); return false;" class="remove-icon" title="Remove from Cart">
+                <i class="fi ti-trash"></i>
+              </a>
+            </div>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+
+      if (cart.length > 4) {
+        container.innerHTML += `<p>+${
+          cart.length - 4
+        } more item(s) in cart</p>`;
+      }
+
+      const subtotalEl = document.querySelector(".mini-checkout-price span");
+      if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+    })
+    .catch((err) => {
+      console.error("Fetch error in mini cart:", err);
+    });
 }
 
 function showCartTable() {
@@ -97,15 +115,21 @@ function showCartTable() {
     return;
   }
 
-  let html = "";
-  let subtotal = 0;
-  let totalQty = 0;
-  let count = 0;
+  const fetches = cart.map((item) =>
+    fetch(`https://fakestoreapi.com/products/${item.id}`).then((res) =>
+      res.json()
+    )
+  );
 
-  cart.forEach((item) => {
-    fetch(`https://fakestoreapi.com/products/${item.id}`)
-      .then((res) => res.json())
-      .then((product) => {
+  Promise.all(fetches)
+    .then((products) => {
+      let html = "";
+      let subtotal = 0;
+      let totalQty = 0;
+
+      for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        const item = cart[i];
         const price = Number(product.price) || 0;
         const qty = Number(item.qty) || 0;
         const itemTotal = price * qty;
@@ -121,44 +145,38 @@ function showCartTable() {
             <td class="product">
               <ul>
                 <li class="first-cart">${product.title}</li>
-                <li>Brand : N/A</li>
-                <li>Size : N/A</li>
               </ul>
             </td>
             <td class="stock">
-              <ul class="input-style">
-                <li class="quantity cart-plus-minus">
-                  <input type="text" value="${qty}" readonly />
-                </li>
-              </ul>
+              <input type="text" value="${qty}" readonly style="width: 40px; text-align: center;" />
             </td>
             <td class="ptice">$${price.toFixed(2)}</td>
             <td class="stock">$${itemTotal.toFixed(2)}</td>
             <td class="action">
-              <ul>
-                <li class="w-btn">
-                  <a href="#" onclick="removeFromCart(${
-                    item.id
-                  }); return false;" title="Remove from Cart">
-                    <i class="fi ti-trash"></i>
-                  </a>
-                </li>
-              </ul>
+              <div class="cart-action-buttons">
+                <button type="button" class="qty-btn" onclick="decreaseQuantity(event, ${
+                  item.id
+                })">-</button>
+                <button type="button" class="qty-btn" onclick="increaseQuantity(event, ${
+                  item.id
+                })">+</button>
+                <a href="#" onclick="removeFromCart(${
+                  item.id
+                }); return false;" title="Remove from Cart" class="remove-icon">
+                  <i class="fi ti-trash"></i>
+                </a>
+              </div>
             </td>
           </tr>
         `;
-      })
-      .catch((error) => {
-        console.error("Error loading product for cart table:", error);
-      })
-      .finally(() => {
-        count++;
-        if (count === cart.length) {
-          container.innerHTML = html;
-          updateCartSummary(subtotal, totalQty);
-        }
-      });
-  });
+      }
+
+      container.innerHTML = html;
+      updateCartSummary(subtotal, totalQty);
+    })
+    .catch((error) => {
+      console.error("Error loading products for cart table:", error);
+    });
 }
 
 function updateCartSummary(subtotal, totalQty) {
@@ -181,17 +199,72 @@ function updateCartSummary(subtotal, totalQty) {
 
 function removeFromCart(id) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const itemIndex = cart.findIndex((item) => item.id === id);
+  cart = cart.filter((item) => item.id !== id);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  updateMiniCart();
+  showCartTable();
+}
 
-  if (itemIndex > -1) {
-    if (cart[itemIndex].qty > 1) {
-      cart[itemIndex].qty -= 1;
+function decreaseQuantity(event, id) {
+  event.preventDefault();
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const item = cart.find((i) => i.id === id);
+  if (item) {
+    if (item.qty > 1) {
+      item.qty -= 1;
     } else {
-      cart.splice(itemIndex, 1);
+      cart = cart.filter((i) => i.id !== id);
     }
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
     updateMiniCart();
-    showCartTable?.();
+    showCartTable();
   }
 }
+
+function increaseQuantity(event, id) {
+  event.preventDefault();
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const item = cart.find((i) => i.id === id);
+  if (item) {
+    item.qty += 1;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    updateMiniCart();
+    showCartTable();
+  }
+}
+
+const style = document.createElement("style");
+style.textContent = `
+  .cart-action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .qty-btn {
+    padding: 4px 8px;
+    background-color: #ddd;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+  }
+
+  .qty-btn:hover {
+    background-color: #ccc;
+  }
+
+  .remove-icon {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+  }
+
+  .remove-icon:hover {
+    color: red;
+  }
+`;
+document.head.appendChild(style);
